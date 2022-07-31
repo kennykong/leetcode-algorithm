@@ -38,8 +38,8 @@ public class Main2 {
    */
   static int calTime(TreeMap<Integer, Integer> tm) {
 
-    //time[i] = max(time[i-1], time[i]))
-    //time[i] = totalConfTime[i-1] + confTime[i] + runTime[i]
+    //time[i] = max(time[i-1], timeRun[i]))
+    //timeRun[i] = totalConfTime[i-1] + confTime[i] + runTime[i]
 
     int n = tm.size();
     int[] time = new int[n+1];
