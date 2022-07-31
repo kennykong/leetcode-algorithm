@@ -9,10 +9,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 高效的任务规划 <a
  * href="https://www.online1987.com/%e9%ab%98%e6%95%88%e7%9a%84%e4%bb%bb%e5%8a%a1%e8%a7%84%e5%88%92/">题目地址</a>
  */
-public class Main1 {
+public class Main2 {
 
   /**
-   * 按照运行时间长短倒序排 总时间=第一个配置时间 + MAX(第一个运行时间，2到n的配置时间+n的运行时间)
+   * 动态规划标准方式解
    */
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
@@ -38,26 +38,24 @@ public class Main1 {
    */
   static int calTime(TreeMap<Integer, Integer> tm) {
 
-    //总时间=第一个配置时间 + MAX(第一个运行时间，2到n的配置时间+n的运行时间)
+    //time[i] = max(time[i-1], time[i]))
+    //time[i] = totalConfTime[i-1] + confTime[i] + runTime[i]
 
-    int totalTime = 0;
-
-    int firstRunTime = tm.firstKey();
-
-    int firstConfTime = tm.firstEntry().getValue();
-
-    int lastRunTime = tm.lastKey();
+    int n = tm.size();
+    int[] time = new int[n+1];
+    time[0] = 0;
 
     AtomicInteger totalConfTime = new AtomicInteger();
+    AtomicInteger index = new AtomicInteger();
     tm.forEach((key, value) -> {
+      int i = index.get();
+      int nthTime = totalConfTime.get() + key + value;
+      time[i + 1] = Math.max(time[i], nthTime);
       totalConfTime.addAndGet(value);
+      index.incrementAndGet();
     });
 
-    int totalConfTimeFrom2 = totalConfTime.get() - firstConfTime;
-
-    totalTime = firstConfTime + Math.max(firstRunTime, totalConfTimeFrom2 + lastRunTime);
-    
-    return totalTime;
+    return time[n];
   }
 }
 
