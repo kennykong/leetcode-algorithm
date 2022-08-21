@@ -14,6 +14,7 @@ public class Main {
     // 使用双指针，当前指向和下一个进行比较，如果是偶数下标就判断是否大，奇数判断是否小
     //5,3,1,2,3
     //1,2,3,4,5
+    //5,4,3,2,1
     Scanner sc = new Scanner(System.in);
     String s = sc.nextLine();
     String[] queueS = s.split(",");
