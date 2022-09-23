@@ -11,17 +11,29 @@ import java.util.Set;
 /**
  * 性能不合格（上下左右）
  * 改（右下左上）没用
+ * 加OneCountryCheck，有用+13%
+ * 考虑使用forkJoin
  */
 public class Solution {
 
   public int solution(int[][] A) {
     // write your code in Java SE 8
+
+    if (checkOneCountry(A)) {
+      return 1;
+    }
     Set<Point> usedPoint = new HashSet<>();
     Map<String, List<Point>> countryMap = new HashMap<>();
     int rowLen = A.length;
+    if (rowLen > 300000) {
+      throw new RuntimeException();
+    }
     int countries = 0;
     for (int i = 0; i < rowLen; i++) {
       int colLen = A[i].length;
+      if (colLen > 300000) {
+        throw new RuntimeException();
+      }
       for (int j = 0; j < colLen; j++) {
         List<Point> nearPoints = new ArrayList<>();
         Point currentPoint = new Point(i, j, A[i][j]);
@@ -38,7 +50,7 @@ public class Solution {
   void findNearPoints(int rowLimit, int colLimit, Point currPoint, int[][] allPoint,
       Set<Point> usedPoint, List<Point> nearPoints) {
 
-    System.out.println("p:"+currPoint.toString());
+    System.out.println("p:" + currPoint.toString());
 
     usedPoint.add(currPoint);
 
@@ -47,7 +59,6 @@ public class Solution {
     int y = currPoint.y;
 
     int v = currPoint.value;
-
 
     //右
     int yRight = currPoint.y + 1;
@@ -96,7 +107,27 @@ public class Solution {
         }
       }
     }
+  }
 
+  boolean checkOneCountry(int[][] A) {
+
+    int lastValue = A[0][0];
+    int rowLen = A.length;
+    if (rowLen > 300000) {
+      throw new RuntimeException();
+    }
+    for (int i = 0; i < rowLen; i++) {
+      int colLen = A[i].length;
+      if (colLen > 300000) {
+        throw new RuntimeException();
+      }
+      for (int j = 0; j < colLen; j++) {
+        if (A[i][j] != lastValue) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }
 
