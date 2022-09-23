@@ -9,7 +9,8 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * 性能不合格
+ * 性能不合格（上下左右）
+ * 改（右下左上）没用
  */
 public class Solution {
 
@@ -47,22 +48,23 @@ public class Solution {
 
     int v = currPoint.value;
 
-    //左
-    int yUp = currPoint.y - 1;
-    if (yUp >= 0) {
-      Point pUp = new Point(x, yUp, allPoint[x][yUp]);
-      if (!usedPoint.contains(pUp)) {
-        if (v == pUp.value) {
-          nearPoints.add(pUp);
-          findNearPoints(rowLimit, colLimit, pUp, allPoint, usedPoint, nearPoints);
+
+    //右
+    int yRight = currPoint.y + 1;
+    if (yRight <= colLimit) {
+      Point pRight = new Point(x, yRight, allPoint[x][yRight]);
+      if (!usedPoint.contains(pRight)) {
+        if (v == pRight.value) {
+          nearPoints.add(pRight);
+          findNearPoints(rowLimit, colLimit, pRight, allPoint, usedPoint, nearPoints);
         }
       }
     }
 
-    //右
-    int yDown = currPoint.y + 1;
-    if (yDown <= colLimit) {
-      Point pDown = new Point(x, yDown, allPoint[x][yDown]);
+    //下
+    int xDown = currPoint.x + 1;
+    if (xDown <= rowLimit) {
+      Point pDown = new Point(xDown, y, allPoint[xDown][y]);
       if (!usedPoint.contains(pDown)) {
         if (v == pDown.value) {
           nearPoints.add(pDown);
@@ -71,10 +73,10 @@ public class Solution {
       }
     }
 
-    //上
-    int xLeft = currPoint.x - 1;
-    if (xLeft >= 0) {
-      Point pLeft = new Point(xLeft, y, allPoint[xLeft][y]);
+    //左
+    int yLeft = currPoint.y - 1;
+    if (yLeft >= 0) {
+      Point pLeft = new Point(x, yLeft, allPoint[x][yLeft]);
       if (!usedPoint.contains(pLeft)) {
         if (v == pLeft.value) {
           nearPoints.add(pLeft);
@@ -83,17 +85,18 @@ public class Solution {
       }
     }
 
-    //下
-    int xRight = currPoint.x + 1;
-    if (xRight <= rowLimit) {
-      Point pRight = new Point(xRight, y, allPoint[xRight][y]);
-      if (!usedPoint.contains(pRight)) {
-        if (v == pRight.value) {
-          nearPoints.add(pRight);
-          findNearPoints(rowLimit, colLimit, pRight, allPoint, usedPoint, nearPoints);
+    //上
+    int xUp = currPoint.x - 1;
+    if (xUp >= 0) {
+      Point pUp = new Point(xUp, y, allPoint[xUp][y]);
+      if (!usedPoint.contains(pUp)) {
+        if (v == pUp.value) {
+          nearPoints.add(pUp);
+          findNearPoints(rowLimit, colLimit, pUp, allPoint, usedPoint, nearPoints);
         }
       }
     }
+
   }
 }
 
