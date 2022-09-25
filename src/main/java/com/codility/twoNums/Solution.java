@@ -41,7 +41,7 @@ class Solution {
         pair.add(p0);
         Point p1 = new Point(i + 1, A[i + 1]);
         pair.add(p1);
-        if (checkPair(pair, pairs)) {
+        if (checkPairNonIntersecting(pair, pairs)) {
           pairs.add(pair);
         }
       }
@@ -54,7 +54,7 @@ class Solution {
   }
 
   //排重
-  boolean checkPair(List<Point> pair1, List<List<Point>> pairs) {
+  boolean checkPairNonIntersecting(List<Point> pair1, List<List<Point>> pairs) {
     List<Point> pair0 = pairs.get(pairs.size() - 1);
     return pair0.get(1).pos != pair1.get(0).pos;
   }
