@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * 消除字符串中重复的字母，每一个字母有一个代价，要求消除重复，而且代价最小。
+ */
 public class Solution {
 
   public int solution(String S, int[] C) {

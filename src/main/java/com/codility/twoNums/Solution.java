@@ -13,6 +13,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+/**
+ * 两个不相交的数对，按加起来相同的和分组，那一组下面数对最多的选出，求那一组数对个数。
+ */
 class Solution {
 
   public int solution(int[] A) {
