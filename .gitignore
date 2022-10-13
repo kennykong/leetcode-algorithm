@@ -1,31 +1,29 @@
-.lein-repl-history
-/classes
-/lib
-deploy/lib
-deploy/logs
-.emacs-project
+# maven ignore
+target/
 *.jar
-bin/jzmq
-.DS_Store
-pom.xml
-deploy/classes
-*.fyc
-*.rbc
-*.pyc
-CHILD
-CHILDMAKER
-NANNY
-\#project.clj\#
-.\#project.clj
-.lein-failures
-_release
+*.war
 *.zip
+*.tar
 *.tar.gz
-.lein-deps-sum
-*.iml
-target
-/.project/
-/.lein-plugins/
+
+# eclipse ignore
+.settings/
+.project
+.classpath
+
+# idea ignore
+.idea/
 *.ipr
+*.iml
 *.iws
-.idea
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# system ignore
+.DS_Store
+Thumbs.db
